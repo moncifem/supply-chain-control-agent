@@ -82,4 +82,3 @@ model Response {
   tokens               Int?
   message              Message  @relation(fields: [messageId], references: [id])
 }
-
