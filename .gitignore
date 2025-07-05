@@ -212,3 +212,5 @@ logs/
 
 # Project specific
 agent/.env 
+.env
+env
