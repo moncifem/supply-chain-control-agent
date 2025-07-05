@@ -116,10 +116,14 @@ Here is a detail of a SELECT * FROM shipments LIMIT 1:
 agent = CodeAgent(
     tools=[sql_engine],
     model=model,
-    instructions=custom_instructions
+    instructions=custom_instructions,
+    name="sql_agent",
+    description="Runs sql queries on the shipments table.",
 )
+agent.prompt_templates["system_prompt"] = agent.prompt_templates["system_prompt"] + custom_instructions
 
 if __name__ == "__main__":
+    print(agent.prompt_templates["system_prompt"])
     # Test the agent
     result = agent.run("Analyse the reasons of delays for the last 10 days.")
     # result = query_db("SELECT * FROM shipments LIMIT 1")
