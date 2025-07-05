@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import Optional
 import requests
 from smolagents import CodeAgent
 from sql_agent import agent, sql_engine, custom_instructions
@@ -20,6 +21,7 @@ def fetch_system_prompt():
 
 class QueryRequest(BaseModel):
     query: str
+    prompt: Optional[str] = None
 
 class QueryResponse(BaseModel):
     result: str
@@ -29,14 +31,13 @@ async def query_shipments(request: QueryRequest):
     """
     Query the shipments database using natural language.
     
-    The system prompt is automatically fetched from https://thesquad.fr/api/prompt
-    
     Parameters:
     - query: The natural language query to execute
+    - prompt: Optional custom prompt. If not provided, fetches from https://thesquad.fr/api/prompt
     
     Examples:
     - {"query": "give me the top 10 shipments that were late"}
-    - {"query": "How many shipments were delayed because of transmission"}
+    - {"query": "How many shipments were delayed because of transmission", "prompt": "custom prompt"}
     """
     try:
         current_agent = CodeAgent(
@@ -45,13 +46,19 @@ async def query_shipments(request: QueryRequest):
             instructions=custom_instructions
         )
         
-        # Always fetch system prompt from external API
-        external_prompt = fetch_system_prompt()
+        # Use provided prompt or fetch from external API
+        if request.prompt:
+            external_prompt = request.prompt
+            print(f"Using provided prompt: {external_prompt[:100]}...")
+        else:
+            external_prompt = fetch_system_prompt()
+            print("Fetching prompt from external API")
+        
         if external_prompt:
             current_agent.prompt_templates["system_prompt"] = current_agent.prompt_templates["system_prompt"] + "\n\n" + external_prompt
             print("Added external prompt to system prompt")
         else:
-            print("Failed to fetch external prompt, using default")
+            print("No external prompt available, using default")
         
         result = current_agent.run(request.query)
         return QueryResponse(result=str(result))
