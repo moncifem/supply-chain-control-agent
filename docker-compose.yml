@@ -34,6 +34,25 @@ services:
     networks:
       - AppNetwork
 
+  Agent:
+    image: python:3.11-slim
+    container_name: agentCT
+    working_dir: /agent
+    volumes:
+      - ./agent:/agent
+    ports:
+      - 8088:8000
+    env_file:
+      - .env
+    environment:
+      - UV_PROJECT_ENVIRONMENT=/tmp/agent-env
+    command: sh -c "pip install uv && rm -rf .venv && uv sync --frozen && uv run uvicorn main:app --host 0.0.0.0 --port 8000"
+    restart: unless-stopped
+    depends_on:
+      - radioMysql
+    networks:
+      - AppNetwork
+
 volumes:
   supply_chain_mysql_data:
 

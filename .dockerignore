@@ -1,0 +1,26 @@
+# Virtual environments
+.venv/
+venv/
+env/
+.env.local
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Node modules (for frontend)
+node_modules/ 
