@@ -3,15 +3,16 @@
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import { MessageHistory } from "./_components/message-history";
+import { PromptEditorModal } from "./_components/prompt-editor-modal";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
   const [sending, setSending] = useState(false);
-  const [refreshTrigger, setRefreshTrigger] = useState(0);
+  const [isPromptEditorOpen, setIsPromptEditorOpen] = useState(false);
 
   const utils = api.useUtils();
 
-  const sendMessage = api.gemini.sendMessage.useMutation({
+  const sendMessage = api.agent.sendMessage.useMutation({
     onMutate: () => {
       setSending(true);
     },
@@ -59,6 +60,12 @@ export default function Home() {
             <p className="text-lg text-slate-600">
               Entrez votre prompt pour commencer
             </p>
+            <button
+              onClick={() => setIsPromptEditorOpen(true)}
+              className="mt-4 rounded-lg bg-blue-600 px-6 py-2 text-white shadow-md transition-colors hover:bg-blue-700"
+            >
+              Éditer le prompt système
+            </button>
           </div>
 
           {/* Prompt Input */}
@@ -104,6 +111,12 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Prompt Editor Modal */}
+      <PromptEditorModal
+        isOpen={isPromptEditorOpen}
+        onClose={() => setIsPromptEditorOpen(false)}
+      />
     </main>
   );
 }
