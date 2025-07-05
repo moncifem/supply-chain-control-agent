@@ -1,7 +1,5 @@
 from smolagents import CodeAgent
-from smolagents import LiteLLMModel
-
-model = LiteLLMModel(model_id="groq/llama-3.3-70b-versatile")
+from model import model
 
 # Create an agent with no tools
 agent = CodeAgent(tools=[], model=model)
