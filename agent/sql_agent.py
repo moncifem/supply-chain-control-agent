@@ -60,4 +60,6 @@ agent = CodeAgent(
     tools=[sql_engine],
     model=model,
 )
-agent.run("give me the top 10 shipments that were late")
+
+if __name__ == "__main__":
+    agent.run("give me the top 10 shipments that were late")
