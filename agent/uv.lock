@@ -24,7 +24,7 @@ requires-dist = [
     { name = "fastapi", specifier = ">=0.115.0" },
     { name = "pandas", specifier = ">=2.3.0" },
     { name = "python-dotenv", specifier = ">=1.1.1" },
-    { name = "smolagents", extras = ["litellm", "toolkit"], specifier = ">=1.19.0" },
+    { name = "smolagents", extras = ["litellm", "prompts", "toolkit"], specifier = ">=1.19.0" },
     { name = "sqlalchemy", specifier = ">=2.0.41" },
     { name = "uvicorn", specifier = ">=0.34.0" },
 ]
