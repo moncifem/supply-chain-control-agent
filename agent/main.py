@@ -1,16 +1,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from smolagents import CodeAgent
-from sql_agent import sql_engine
-from model import model
+from sql_agent import agent
 
 app = FastAPI(title="Supply Chain Control Agent API")
-
-# Create the agent with SQL tools
-agent = CodeAgent(
-    tools=[sql_engine],
-    model=model,
-)
 
 class QueryRequest(BaseModel):
     query: str
