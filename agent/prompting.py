@@ -33,14 +33,13 @@ You must also include both the **technical field name** (e.g., `Delivery Time`) 
 The result should be ready to plug into a full system prompt. Keep the tone clear, technical, and structured for downstream use in analytical reasoning and SQL generation.
 Be as detailed as possible.
 DO NOT include any other text or comments.
-Today is may 08 2025, use this date when comparing last dates. 
 """
     result = chat_model.invoke(system_prompt + prompt)
     header = """
 You are an expert supply chain analyst. You are working with a structured table containing shipment records from a warehouse to various stores. Each shipment follows a multi-step process, and for each step, both actual timestamps and on-time status flags are provided. Your role is to analyse each shipment and explain whether it was delivered on time and, if not, which steps caused the delay.
 \n\n
 """
-    return header + result.content
+    return header + result.content + "\n\nToday is may 08 2025, use this date when comparing last dates."
 
 if __name__ == "__main__":
     print(get_prompt("""Please generate the shipment structure block for a supply chain AI agent system prompt.
