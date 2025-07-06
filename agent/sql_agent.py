@@ -2,6 +2,8 @@ from smolagents import tool, CodeAgent
 from db_connector import get_db, query_db
 from sqlalchemy import text
 from model import model
+from onboarding import onboarding_agent
+from schema_prompt_agent import schema_prompt_agent
 
 engine = get_db()
 
@@ -123,6 +125,8 @@ agent = CodeAgent(
 agent.prompt_templates["system_prompt"] = agent.prompt_templates["system_prompt"] + custom_instructions
 
 if __name__ == "__main__":
+    onboarding_agent.run("List all CSV files in the current directory and onboard the first one you find.")
+    result = schema_prompt_agent.run("Generate system prompts for all tables in the database.")
     print(agent.prompt_templates["system_prompt"])
     # Test the agent
     result = agent.run("Analyse the reasons of delays for the last 10 days.")

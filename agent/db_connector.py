@@ -2,47 +2,26 @@ import sqlite3
 import pandas as pd
 import os
 
-class ShipmentsDB:
+class GenericDB:
     def __init__(self):
-        # Create in-memory SQLite database
         self.conn = sqlite3.connect(':memory:')
         self.cursor = self.conn.cursor()
-        self._load_csv_data()
     
-    def _load_csv_data(self):
-        """Load CSV data into the database"""
-        try:
-            # Read CSV file
-            csv_path = os.path.join(os.path.dirname(__file__), 'shipments.csv')
-            df = pd.read_csv(csv_path)
-            
-            # Create table from pandas DataFrame
-            df.to_sql('shipments', self.conn, if_exists='replace', index=False)
-            
-            print(f"Loaded {len(df)} records into shipments table")
-            print(f"Columns: {list(df.columns)}")
-            
-        except Exception as e:
-            print(f"Error loading CSV: {e}")
-            raise
+    def load_csv_to_table(self, csv_path, table_name):
+        df = pd.read_csv(csv_path)
+        df.to_sql(table_name, self.conn, if_exists='replace', index=False)
+        return f"Loaded {len(df)} records into {table_name} table"
     
     def execute_query(self, sql):
-        """Execute SQL query and return results"""
         try:
             self.cursor.execute(sql)
             
-            # Check if query returns results
             if self.cursor.description is None:
-                # No results to fetch (INSERT, UPDATE, DELETE, etc.)
                 return []
             
-            # Get column names
             columns = [description[0] for description in self.cursor.description]
-            
-            # Fetch all results
             rows = self.cursor.fetchall()
             
-            # Return as list of dictionaries
             result = []
             for row in rows:
                 result.append(dict(zip(columns, row)))
@@ -54,39 +33,36 @@ class ShipmentsDB:
             print(f"Query was: {sql}")
             raise
     
-    def get_table_info(self):
-        """Get information about the shipments table"""
-        return self.execute_query("PRAGMA table_info(shipments)")
+    def get_table_info(self, table_name):
+        return self.execute_query(f"PRAGMA table_info({table_name})")
     
-    def get_sample_data(self, limit=5):
-        """Get sample data from the table"""
-        return self.execute_query(f"SELECT * FROM shipments LIMIT {limit}")
+    def get_sample_data(self, table_name, limit=5):
+        return self.execute_query(f"SELECT * FROM {table_name} LIMIT {limit}")
+    
+    def get_tables(self):
+        return self.execute_query("SELECT name FROM sqlite_master WHERE type='table'")
     
     def close(self):
-        """Close database connection"""
         self.conn.close()
 
-# Global instance
 db = None
 
 def get_db():
-    """Get or create database instance"""
     global db
     if db is None:
-        db = ShipmentsDB()
+        db = GenericDB()
+        if os.path.exists(os.path.join(os.path.dirname(__file__), 'shipments.csv')):
+            db.load_csv_to_table(os.path.join(os.path.dirname(__file__), 'shipments.csv'), 'shipments')
     return db
 
 def query_db(sql):
-    """Execute SQL query and return results"""
     database = get_db()
     return database.execute_query(sql)
 
-def get_db_info():
-    """Get database table information"""
+def load_csv(csv_path, table_name):
     database = get_db()
-    return database.get_table_info()
+    return database.load_csv_to_table(csv_path, table_name)
 
-def get_sample():
-    """Get sample data"""
+def get_tables():
     database = get_db()
-    return database.get_sample_data()
+    return database.get_tables()
