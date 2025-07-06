@@ -1,0 +1,51 @@
+Database Table: shipments
+
+Schema:
+- Unnamed: 0: INTEGER
+- Test: INTEGER
+- Order Time: TEXT
+- Order Date: TEXT
+- City: TEXT
+- Store: TEXT
+- ShipmentID: TEXT
+- Order Amount: INTEGER
+- Transmission OnTime: INTEGER
+- Transmission: TEXT
+- Start PickPack: TEXT
+- Pickpack: TEXT
+- Loading: TEXT
+- Expected Loading Date: TEXT
+- Loading OnTime: INTEGER
+- Loading Date: TEXT
+- Loading Date+1: TEXT
+- Airport Arrival: TEXT
+- Airport OnTime: INTEGER
+- Airport Arrival Date: TEXT
+- Airport Arrival Date+1: TEXT
+- Takeoff: TEXT
+- Landing: TEXT
+- Landing Date: TEXT
+- Landing Date+1: TEXT
+- Landing Date+2: TEXT
+- Landing OnTime: INTEGER
+- Start Clearance: TEXT
+- End Clearance: TEXT
+- Leaving Airport: TEXT
+- City Arrival: TEXT
+- City Arrival Date: TEXT
+- City Arrival Date+1: TEXT
+- Store Open: INTEGER
+- Delivery Time: TEXT
+- Delivery Date: TEXT
+- Expected Delivery Time: TEXT
+- On Time Delivery: INTEGER
+
+Sample Data (showing 3 records):
+Record 1: {'Unnamed: 0': 0, 'Test': 1, 'Order Time': '2021-05-02 17:00:00.000000', 'Order Date': '2021-05-02', 'City': 'CITY2', 'Store': 'CITY2/ST8', 'ShipmentID': '2021-05-02/CITY2/ST8/1', 'Order Amount': 5445, 'Transmission OnTime': 0, 'Transmission': '2021-05-03 17:00:00.000000', 'Start PickPack': '2021-05-04 07:00:00.000000', 'Pickpack': '2021-05-04 13:31:48.042144', 'Loading': '2021-05-04 19:00:00.000000', 'Expected Loading Date': '2021-05-04', 'Loading OnTime': 1, 'Loading Date': '2021-05-04', 'Loading Date+1': '2021-05-05', 'Airport Arrival': '2021-05-04 21:59:12.658318', 'Airport OnTime': 1, 'Airport Arrival Date': '2021-05-04', 'Airport Arrival Date+1': '2021-05-05', 'Takeoff': '2021-05-05 06:00:00.000000', 'Landing': '2021-05-05 19:11:16.791315', 'Landing Date': '2021-05-05', 'Landing Date+1': '2021-05-06', 'Landing Date+2': '2021-05-07', 'Landing OnTime': 1, 'Start Clearance': '2021-05-06 09:00:00.000000', 'End Clearance': '2021-05-06 11:32:50.282538', 'Leaving Airport': '2021-05-06 12:19:46.058471', 'City Arrival': '2021-05-06 17:08:54.687496', 'City Arrival Date': '2021-05-06', 'City Arrival Date+1': '2021-05-07', 'Store Open': 0, 'Delivery Time': '2021-05-07 16:30:00.000000', 'Delivery Date': '2021-05-07', 'Expected Delivery Time': '2021-05-07 13:45:00', 'On Time Delivery': 0}
+Record 2: {'Unnamed: 0': 1, 'Test': 2, 'Order Time': '2021-05-09 12:00:00.000000', 'Order Date': '2021-05-09', 'City': 'CITY3', 'Store': 'CITY3/ST9', 'ShipmentID': '2021-05-09/CITY3/ST9/2', 'Order Amount': 2054, 'Transmission OnTime': 1, 'Transmission': '2021-05-09 13:10:20.919487', 'Start PickPack': '2021-05-10 07:00:00.000000', 'Pickpack': '2021-05-10 12:38:30.320130', 'Loading': '2021-05-10 19:00:00.000000', 'Expected Loading Date': '2021-05-10', 'Loading OnTime': 1, 'Loading Date': '2021-05-10', 'Loading Date+1': '2021-05-11', 'Airport Arrival': '2021-05-10 21:53:39.835069', 'Airport OnTime': 1, 'Airport Arrival Date': '2021-05-10', 'Airport Arrival Date+1': '2021-05-11', 'Takeoff': '2021-05-11 06:00:00.000000', 'Landing': '2021-05-11 17:49:13.720279', 'Landing Date': '2021-05-11', 'Landing Date+1': '2021-05-12', 'Landing Date+2': '2021-05-13', 'Landing OnTime': 1, 'Start Clearance': '2021-05-12 09:00:00.000000', 'End Clearance': '2021-05-12 10:11:07.947605', 'Leaving Airport': '2021-05-12 10:40:00.403568', 'City Arrival': '2021-05-12 15:40:02.394369', 'City Arrival Date': '2021-05-12', 'City Arrival Date+1': '2021-05-13', 'Store Open': 1, 'Delivery Time': '2021-05-12 15:40:02.394369', 'Delivery Date': '2021-05-12', 'Expected Delivery Time': '2021-05-13 13:45:00', 'On Time Delivery': 1}
+Record 3: {'Unnamed: 0': 2, 'Test': 3, 'Order Time': '2021-05-02 14:00:00.000000', 'Order Date': '2021-05-02', 'City': 'CITY4', 'Store': 'CITY4/ST9', 'ShipmentID': '2021-05-02/CITY4/ST9/3', 'Order Amount': 8677, 'Transmission OnTime': 1, 'Transmission': '2021-05-02 14:56:38.371848', 'Start PickPack': '2021-05-03 07:00:00.000000', 'Pickpack': '2021-05-03 15:26:51.990665', 'Loading': '2021-05-03 19:00:00.000000', 'Expected Loading Date': '2021-05-03', 'Loading OnTime': 1, 'Loading Date': '2021-05-03', 'Loading Date+1': '2021-05-04', 'Airport Arrival': '2021-05-03 22:38:20.739346', 'Airport OnTime': 1, 'Airport Arrival Date': '2021-05-03', 'Airport Arrival Date+1': '2021-05-04', 'Takeoff': '2021-05-04 06:00:00.000000', 'Landing': '2021-05-04 17:04:52.695297', 'Landing Date': '2021-05-04', 'Landing Date+1': '2021-05-05', 'Landing Date+2': '2021-05-06', 'Landing OnTime': 1, 'Start Clearance': '2021-05-05 09:00:00.000000', 'End Clearance': '2021-05-05 11:37:58.688272', 'Leaving Airport': '2021-05-05 12:28:22.108917', 'City Arrival': '2021-05-05 15:31:02.950925', 'City Arrival Date': '2021-05-05', 'City Arrival Date+1': '2021-05-06', 'Store Open': 1, 'Delivery Time': '2021-05-05 15:31:02.950925', 'Delivery Date': '2021-05-05', 'Expected Delivery Time': '2021-05-06 13:45:00', 'On Time Delivery': 1}
+
+Total columns: 38
+Table contains data about: shipments
+
+Use this schema when writing SQL queries for the shipments table.
