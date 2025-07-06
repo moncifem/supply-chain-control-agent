@@ -1,0 +1,130 @@
+{
+  "Test": {
+    "description": "",
+    "type": ""
+  },
+  "Order Time": {
+    "description": "Order Creation Time",
+    "type": "Timestamp"
+  },
+  "Order Date": {
+    "description": "Order Creation Date",
+    "type": "Date"
+  },
+  "City": {
+    "description": "City destination",
+    "type": "Location"
+  },
+  "Store": {
+    "description": "Store destination",
+    "type": "Location"
+  },
+  "ShipmentID": {
+    "description": "ID of the shipment",
+    "type": "ID"
+  },
+  "Order Amount": {
+    "description": "Order amount in euros",
+    "type": "Quantity"
+  },
+  "Transmission OnTime": {
+    "description": "Flag of transmission on time",
+    "type": "Flag"
+  },
+  "Transmission": {
+    "description": "Transmission time",
+    "type": "Timestamp"
+  },
+  "Start PickPack": {
+    "description": "Start of the Pick and Pack Process in the warehouse",
+    "type": "Timestamp"
+  },
+  "Pickpack": {
+    "description": "End of the Pick and Pack Process in the warehouse",
+    "type": "Timestamp"
+  },
+  "Loading": {
+    "description": "Actual loading time at the warehouse",
+    "type": "Timestamp"
+  },
+  "Expected Loading Date": {
+    "description": "Expected loading time at the warehouse",
+    "type": "Date"
+  },
+  "Loading OnTime": {
+    "description": "Flag of the loading on time",
+    "type": "Flag"
+  },
+  "Loading Date": {
+    "description": "Loading date",
+    "type": "Date"
+  },
+  "Airport Arrival": {
+    "description": "Time of arrival at the airport from the warehouse",
+    "type": "Timestamp"
+  },
+  "Airport OnTime": {
+    "description": "Flag of arrival on time",
+    "type": "Flag"
+  },
+  "Airport Arrival Date": {
+    "description": "Airport arrival date",
+    "type": "Date"
+  },
+  "Takeoff": {
+    "description": "Flight takeoff time",
+    "type": "Timestamp"
+  },
+  "Landing": {
+    "description": "Flight landing time",
+    "type": "Timestamp"
+  },
+  "Landing Date": {
+    "description": "Landing date",
+    "type": "Date"
+  },
+  "Landing OnTime": {
+    "description": "Flag of landing on time",
+    "type": "Flag"
+  },
+  "Start Clearance": {
+    "description": "Start time of the clearance process",
+    "type": "Timestamp"
+  },
+  "End Clearance": {
+    "description": "End time of the clearance process",
+    "type": "Timestamp"
+  },
+  "Leaving Airport": {
+    "description": "Time when the truck leaves the airport",
+    "type": "Timestamp"
+  },
+  "City Arrival": {
+    "description": "Time when the truck arrives in the city",
+    "type": "Timestamp"
+  },
+  "City Arrival Date": {
+    "description": "Date when the truck arrives in the city",
+    "type": "Date"
+  },
+  "Store Open": {
+    "description": "Flag if the store is open when the truck arrives",
+    "type": "Flag"
+  },
+  "Delivery Time": {
+    "description": "Actual store delivery time",
+    "type": "Timestamp"
+  },
+  "Delivery Date": {
+    "description": "Actual store delivery date",
+    "type": "Date"
+  },
+  "Expected Delivery Time": {
+    "description": "Expected store delivery time",
+    "type": "Timestamp"
+  },
+  "On Time Delivery": {
+    "description": "Flag of the on time delivery",
+    "type": "Flag"
+  }
+}
