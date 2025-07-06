@@ -1,6 +1,7 @@
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
 import { geminiRouter } from "./routers/geminit";
 import { agentRouter } from "./routers/agent";
+import { groqRouter } from "./routers/groq";
 
 /**
  * This is the primary router for your server.
@@ -10,6 +11,7 @@ import { agentRouter } from "./routers/agent";
 export const appRouter = createTRPCRouter({
   gemini: geminiRouter,
   agent: agentRouter,
+  groq: groqRouter
 });
 
 // export type definition of API
