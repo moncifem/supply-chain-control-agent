@@ -33,6 +33,7 @@ You must also include both the **technical field name** (e.g., `Delivery Time`) 
 The result should be ready to plug into a full system prompt. Keep the tone clear, technical, and structured for downstream use in analytical reasoning and SQL generation.
 Be as detailed as possible.
 DO NOT include any other text or comments.
+Today is may 08 2025, use this date when comparing last dates. 
 """
     return chat_model.invoke(system_prompt + prompt)
 
