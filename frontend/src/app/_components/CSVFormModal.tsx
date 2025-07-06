@@ -1,9 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { api } from "~/trpc/react";
+import tempsData from "../OnBoarding/temp.json";
 
+export type tempData = {
+  description: string;
+  type: string;
+};
+
+// Add an index signature to allow string indexing
+// eslint-disable-next-line @typescript-eslint/consistent-indexed-object-style
+const temps: { [key: string]: tempData } = tempsData;
 interface ColumnConfig {
   name: string;
   description: string;
@@ -20,12 +29,14 @@ interface CSVFormModalProps {
 // Types de données disponibles
 const DATA_TYPES = [
   { value: "Shipment IDs (only one per line)", label: "ID" },
+  { value: "Time", label: "Timestamp" },
   { value: "Date", label: "Date" },
   {
-    value: "Locations that can be the departure or destination",
+    value:
+      "Locations that can be the departure or destination (warehouse, store, ...)",
     label: "Location",
   },
-  { value: "Boolean that can be TRUE or False", label: "Flag" },
+  { value: "Boolean that can be TRUE or FALSE", label: "Flag" },
   {
     value:
       "Quantity of goods in (Pcs, Boxes, Pallets) or Amount in (Euros, Dollars)",
@@ -65,11 +76,23 @@ export default function CSVFormModal({
     })),
   );
 
+  useEffect(() => {
+    columnConfigs.forEach((col, index) => {
+      if (!col.description) {
+        const tempEntry = temps[col.name] as tempData | undefined;
+        if (tempEntry) {
+          updateColumn(index, "description", tempEntry.description);
+          updateColumn(index, "type", tempEntry.type);
+        }
+      }
+    });
+  }, [columnConfigs]);
+  
   if (!isOpen) return null;
-
+  
   const generateFormData = () => {
     const result: Record<string, { description: string; type: string }> = {};
-
+    
     columnConfigs
       .filter((col) => col.included)
       .forEach((col) => {
@@ -114,7 +137,7 @@ export default function CSVFormModal({
   };
 
   const includedCount = columnConfigs.filter((col) => col.included).length;
-
+  
   // Placeholder quand aucun CSV n'est chargé
   if (!csvData || csvData.length === 0) {
     return (

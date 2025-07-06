@@ -1,6 +1,8 @@
 import { z } from "zod";
 import { publicProcedure } from "~/server/api/trpc";
 import { db } from "~/server/db";
+import path from "path";
+import { promises as fs } from "fs";
 
 const generatorQuery = (jsonSchema: string, dataset: string) => {
   return `Please generate the shipment structure block for a supply chain AI agent system prompt.
@@ -82,16 +84,21 @@ export const sendForm = publicProcedure
 
 		// Save the response to the database
 		const message = await db.message.create({
-			data: {
-				text: response.response,
-				response: {
-					create: {
-						text: response.response,
-						model: modelG,
-					}
-				}
-			},
-		});
-
+      data: {
+        text: prompt,
+        response: {
+          create: {
+            text: response.response,
+            model: modelG,
+          },
+        },
+      },
+    });
+		const PROMPT_FILE_PATH = path.join(
+			process.cwd(),
+			"src/app/api/prompt/prompt.txt",
+		);
+		// Écrire directement le prompt dans le fichier txt
+				await fs.writeFile(PROMPT_FILE_PATH, response.response, "utf8");
 		return message;
 	});
