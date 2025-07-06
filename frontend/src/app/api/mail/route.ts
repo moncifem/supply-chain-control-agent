@@ -55,22 +55,52 @@ export async function POST(request: NextRequest) {
     };
 
     console.log("Mail object created:", mailObject);
-		const response = await callSquadAgent(
+    const response = await callSquadAgent(
       `Réponds à cet email de ${mailObject.fromName} (${mailObject.fromAddress}) : ${mailObject.body}`,
       "mail-processing",
     );
-		//  verifie que tout  est defini
-		if (!mailObject.fromAddress || !mailObject.threadId || !mailObject.fromName || !mailObject.subject || !mailObject.body) {
-			return NextResponse.json(
-				{ error: "Missing required fields in mail data" },
-				{ status: 400 },
-			);
-		}
+    //  verifie que tout  est defini
+    if (
+      !mailObject.fromAddress ||
+      !mailObject.threadId ||
+      !mailObject.fromName ||
+      !mailObject.subject ||
+      !mailObject.body
+    ) {
+      return NextResponse.json(
+        { error: "Missing required fields in mail data" },
+        { status: 400 },
+      );
+    }
 
+    // Envoyer vers le webhook n8n
+    try {
+      const webhookResponse = await fetch(
+        "https://n8n.srv753028.hstgr.cloud/webhook-test/0912f56b-4eaf-4ad4-a759-957082ee64bb",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            ...mailObject,
+            response: response.response,
+          }),
+        },
+      );
 
+      if (!webhookResponse.ok) {
+        console.error("Webhook call failed:", webhookResponse.status);
+      } else {
+        console.log("Webhook called successfully");
+      }
+    } catch (webhookError) {
+      console.error("Error calling webhook:", webhookError);
+    }
     return NextResponse.json(
       {
         message: "Mail data processed successfully",
+        response: response.response,
         data: mailObject,
       },
       { status: 200 },

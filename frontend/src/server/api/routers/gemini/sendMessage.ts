@@ -39,13 +39,16 @@ export const sendMessage = publicProcedure
   )
   .mutation(async ({ input }) => {
     const { content } = input;
+    const message = await sendMessageCore(content);
+    return message;
+  });
+
+  export const sendMessageCore = async (content: string) => {
     const reqNumber = ++requestCounter;
     console.log(`[Gemini] Requête #${reqNumber} démarrée 🕵️`);
     // Log the message content
-    console.log("Message content:", content);
     const response = await callGemini(content, `${reqNumber}`);
     console.log(`[Gemini] Requête #${reqNumber} terminée ✅`);
-		console.log("Gemini response:", response);
     // Save the message to the database
     const message = await db.message.create({
       data: {
@@ -63,4 +66,4 @@ export const sendMessage = publicProcedure
     console.log("Saved message:", message);
 
     return message;
-  });
+  }

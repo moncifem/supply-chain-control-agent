@@ -50,6 +50,15 @@ export const sendMessage = publicProcedure
   )
   .mutation(async ({ input }) => {
     const { content } = input;
+    const message = await sendMessageCore(content, modelG);
+
+    return message;
+  });
+
+  export async function sendMessageCore(
+    content: string,
+    model: string = modelG,
+  ) {
     const reqNumber = ++requestCounter;
     console.log(`[Squad Agent] Requête #${reqNumber} démarrée 🕵️`);
     // Log the message content
@@ -67,7 +76,7 @@ export const sendMessage = publicProcedure
         response: {
           create: {
             text: response.response,
-            model: modelG,
+            model,
           },
         },
       },
@@ -77,4 +86,4 @@ export const sendMessage = publicProcedure
     console.log("Saved message:", message);
 
     return message;
-  });
+  }

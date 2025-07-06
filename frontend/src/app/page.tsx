@@ -4,6 +4,7 @@ import { useState } from "react";
 import { api } from "~/trpc/react";
 import { MessageHistory } from "./_components/message-history";
 import { PromptEditorModal } from "./_components/prompt-editor-modal";
+import AudioRecorder from "./_components/audioRecorder";
 
 export default function Home() {
   const [prompt, setPrompt] = useState("");
@@ -82,7 +83,7 @@ export default function Home() {
                 />
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex items-center justify-center space-x-0">
                 <button
                   type="submit"
                   disabled={!prompt.trim() || sending}
@@ -90,6 +91,12 @@ export default function Home() {
                 >
                   {sending ? "Envoi..." : "Valider"}
                 </button>
+                <AudioRecorder
+                  onSuccess={(data) =>
+                    void utils.gemini.getMessages.invalidate()
+                  }
+                  onError={(error) => console.error("Erreur :", error)}
+                />
               </div>
             </form>
           </div>
