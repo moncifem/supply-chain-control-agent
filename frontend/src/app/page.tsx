@@ -1,69 +1,122 @@
-import Link from "next/link";
+"use client";
 
-import { LatestPost } from "~/app/_components/post";
-import { auth } from "~/server/auth";
-import { api, HydrateClient } from "~/trpc/server";
+import { useState } from "react";
+import { api } from "~/trpc/react";
+import { MessageHistory } from "./_components/message-history";
+import { PromptEditorModal } from "./_components/prompt-editor-modal";
 
-export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
-  const session = await auth();
+export default function Home() {
+  const [prompt, setPrompt] = useState("");
+  const [sending, setSending] = useState(false);
+  const [isPromptEditorOpen, setIsPromptEditorOpen] = useState(false);
 
-  if (session?.user) {
-    void api.post.getLatest.prefetch();
-  }
+  const utils = api.useUtils();
+
+  const sendMessage = api.agent.sendMessage.useMutation({
+    onMutate: () => {
+      setSending(true);
+    },
+    onSuccess: (data) => {
+      console.log("Message sent successfully:", data);
+      setPrompt(""); // Clear the prompt after sending
+      // Invalider la query pour forcer le rechargement
+      void utils.gemini.getMessages.invalidate();
+    },
+    onError: (error) => {
+      console.error("Error sending message:", error);
+    },
+    onSettled: () => {
+      setSending(false);
+    },
+  });
+
+  const handleSubmit = () => {
+    if (prompt.trim() && !sending) {
+      sendMessage.mutate({ content: prompt.trim() });
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    handleSubmit();
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
 
   return (
-    <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
-          </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
+      <div className="flex min-h-screen items-center justify-center p-4">
+        <div className="w-full max-w-2xl">
+          {/* Header */}
+          <div className="mb-12 text-center">
+            <h1 className="mb-4 text-4xl font-bold text-slate-800">
+              Dashboard Hackathon
+            </h1>
+            <p className="text-lg text-slate-600">
+              Entrez votre prompt pour commencer
             </p>
-
-            <div className="flex flex-col items-center justify-center gap-4">
-              <p className="text-center text-2xl text-white">
-                {session && <span>Logged in as {session.user?.name}</span>}
-              </p>
-              <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >
-                {session ? "Sign out" : "Sign in"}
-              </Link>
-            </div>
+            <button
+              onClick={() => setIsPromptEditorOpen(true)}
+              className="mt-4 rounded-lg bg-blue-600 px-6 py-2 text-white shadow-md transition-colors hover:bg-blue-700"
+            >
+              Éditer le prompt système
+            </button>
           </div>
 
-          {session?.user && <LatestPost />}
+          {/* Prompt Input */}
+          <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-xl">
+            <form onSubmit={handleFormSubmit} className="space-y-6">
+              <div>
+                <textarea
+                  value={prompt}
+                  onChange={(e) => setPrompt(e.target.value)}
+                  onKeyPress={handleKeyPress}
+                  placeholder="Tapez votre prompt ici..."
+                  className="h-32 w-full resize-none rounded-xl border border-slate-300 p-4 text-slate-700 placeholder-slate-400 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  autoFocus
+                />
+              </div>
+
+              <div className="flex justify-center">
+                <button
+                  type="submit"
+                  disabled={!prompt.trim() || sending}
+                  className="rounded-xl bg-slate-800 px-8 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+                >
+                  {sending ? "Envoi..." : "Valider"}
+                </button>
+              </div>
+            </form>
+          </div>
+
+          {/* Instruction */}
+          <div className="mt-8 text-center">
+            <p className="text-sm text-slate-500">
+              Appuyez sur{" "}
+              <kbd className="rounded bg-slate-200 px-2 py-1 text-xs">
+                Entrée
+              </kbd>{" "}
+              ou cliquez sur le bouton pour valider
+            </p>
+          </div>
+
+          {/* Message History */}
+          <div className="mt-12">
+            <MessageHistory />
+          </div>
         </div>
-      </main>
-    </HydrateClient>
+      </div>
+
+      {/* Prompt Editor Modal */}
+      <PromptEditorModal
+        isOpen={isPromptEditorOpen}
+        onClose={() => setIsPromptEditorOpen(false)}
+      />
+    </main>
   );
 }
