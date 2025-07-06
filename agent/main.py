@@ -100,7 +100,7 @@ async def generate_prompt(request: ChatRequest):
     """
     try:
         response = get_prompt(request.prompt)
-        return ChatResponse(response=response.content)
+        return ChatResponse(response=response)
     except Exception as e:
         return ChatResponse(response=f"Error: {str(e)}")
 

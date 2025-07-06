@@ -35,7 +35,12 @@ Be as detailed as possible.
 DO NOT include any other text or comments.
 Today is may 08 2025, use this date when comparing last dates. 
 """
-    return chat_model.invoke(system_prompt + prompt)
+    result = chat_model.invoke(system_prompt + prompt)
+    header = """
+You are an expert supply chain analyst. You are working with a structured table containing shipment records from a warehouse to various stores. Each shipment follows a multi-step process, and for each step, both actual timestamps and on-time status flags are provided. Your role is to analyse each shipment and explain whether it was delivered on time and, if not, which steps caused the delay.
+\n\n
+"""
+    return header + result.content
 
 if __name__ == "__main__":
     print(get_prompt("""Please generate the shipment structure block for a supply chain AI agent system prompt.
@@ -186,4 +191,4 @@ Here is a sample of the dataset (first 2–3 rows):
 0,1,2021-05-02 17:00:00.000000,2021-05-02,CITY2,CITY2/ST8,2021-05-02/CITY2/ST8/1,5445,False,2021-05-03 17:00:00.000000,2021-05-04 07:00:00.000000,2021-05-04 13:31:48.042144,2021-05-04 19:00:00.000000,2021-05-04,True,2021-05-04,2021-05-05,2021-05-04 21:59:12.658318,True,2021-05-04,2021-05-05,2021-05-05 06:00:00.000000,2021-05-05 19:11:16.791315,2021-05-05,2021-05-06,2021-05-07,True,2021-05-06 09:00:00.000000,2021-05-06 11:32:50.282538,2021-05-06 12:19:46.058471,2021-05-06 17:08:54.687496,2021-05-06,2021-05-07,False,2021-05-07 16:30:00.000000,2021-05-07,2021-05-07 13:45:00,False
 1,2,2021-05-09 12:00:00.000000,2021-05-09,CITY3,CITY3/ST9,2021-05-09/CITY3/ST9/2,2054,True,2021-05-09 13:10:20.919487,2021-05-10 07:00:00.000000,2021-05-10 12:38:30.320130,2021-05-10 19:00:00.000000,2021-05-10,True,2021-05-10,2021-05-11,2021-05-10 21:53:39.835069,True,2021-05-10,2021-05-11,2021-05-11 06:00:00.000000,2021-05-11 17:49:13.720279,2021-05-11,2021-05-12,2021-05-13,True,2021-05-12 09:00:00.000000,2021-05-12 10:11:07.947605,2021-05-12 10:40:00.403568,2021-05-12 15:40:02.394369,2021-05-12,2021-05-13,True,2021-05-12 15:40:02.394369,2021-05-12,2021-05-13 13:45:00,True
 Return only the structured steps explanation block.
-    """).content)
+    """))
