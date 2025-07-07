@@ -8,22 +8,23 @@ interface QueryResponse {
 
 interface QueryRequest {
   query: string;
-	prompt: string;
+  prompt: string;
 }
 
 const promptMail = "Your output should be an HTML-formatted email response that answers the question.Only output the HTML body of the email, nothing else."
 
-export async function callSquadAgent(query: string, reqNumber: string) {
-	const start = Date.now();
-	const timer = setInterval(() => {
-		const elapsed = Math.round((Date.now() - start) / 1000);
-		console.log(
-			`[Squad Agent] Requête #${reqNumber} toujours en cours... (${elapsed}s)`,
-		);
-	}, 5000);
+// Déplacer la fonction AVANT les exports et enlever 'export'
+async function callSquadAgent(query: string, reqNumber: string) {
+  const start = Date.now();
+  const timer = setInterval(() => {
+    const elapsed = Math.round((Date.now() - start) / 1000);
+    console.log(
+      `[Squad Agent] Requête #${reqNumber} toujours en cours... (${elapsed}s)`,
+    );
+  }, 5000);
 
-	try {
-		const response = await fetch("http://localhost:8088/agent/query", {
+  try {
+    const response = await fetch("https://raise.logi-green.com/agent/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -31,16 +32,17 @@ export async function callSquadAgent(query: string, reqNumber: string) {
       body: JSON.stringify({ query, prompt: promptMail } as QueryRequest),
     });
 
-		if (!response.ok) {
-			throw new Error(`HTTP error! status: ${response.status}`);
-		}
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
 
-		const data = (await response.json()) as QueryResponse;
-		return { response: data.result };
-	} finally {
-		clearInterval(timer);
-	}
+    const data = (await response.json()) as QueryResponse;
+    return { response: data.result };
+  } finally {
+    clearInterval(timer);
+  }
 }
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();

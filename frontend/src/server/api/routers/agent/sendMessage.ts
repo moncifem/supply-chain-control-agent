@@ -23,7 +23,7 @@ export async function callSquadAgent(query: string, reqNumber: string) {
   }, 5000);
 
   try {
-    const response = await fetch("http://localhost:8088/agent/query", {
+    const response = await fetch("https://raise.logi-green.com/agent/query", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -108,7 +108,7 @@ export default function AudioRecorder({
         setDuration((prev) => prev + 1);
       }, 1000);
     } catch (error) {
-      console.error("Erreur lors du démarrage de l'enregistrement:", error);
+      console.error("Error starting recording:", error);
       setHasPermission(false);
     }
   };
@@ -155,7 +155,7 @@ export default function AudioRecorder({
   if (hasPermission === false) {
     return (
       <div className={className}>
-        <p className="text-sm text-red-600">Microphone non autorisé</p>
+        <p className="text-sm text-red-600">Microphone not authorized</p>
       </div>
     );
   }
@@ -180,7 +180,7 @@ export default function AudioRecorder({
           onClick={startRecording}
           className="ml-4 rounded-xl bg-red-600 px-8 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-red-700"
         >
-          🎤 Enregistrer
+          🎤 Record
         </button>
       )}
 
@@ -189,7 +189,7 @@ export default function AudioRecorder({
           onClick={stopRecording}
           className="ml-4 rounded-xl bg-slate-800 px-8 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-slate-700"
         >
-          ⏹️ Arrêter
+          ⏹️ Stop
         </button>
       )}
 
@@ -200,7 +200,7 @@ export default function AudioRecorder({
             disabled={sending}
             className="rounded-xl bg-green-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-green-400"
           >
-            {sending ? "Envoi..." : "📤 Envoyer"}
+            {sending ? "Sending..." : "📤 Send"}
           </button>
 
           <button
@@ -208,7 +208,7 @@ export default function AudioRecorder({
             disabled={sending}
             className="rounded-xl bg-gray-500 px-6 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-gray-600 disabled:cursor-not-allowed disabled:bg-gray-400"
           >
-            ❌ Annuler
+            ❌ Cancel
           </button>
         </div>
       )}

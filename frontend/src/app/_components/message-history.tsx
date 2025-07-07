@@ -55,10 +55,12 @@ export function MessageHistory() {
           </div>
           <div>
             <h2 className="text-lg font-semibold text-slate-800">
-              Conversation avec l&apos;Agent IA
+              {/* Conversation avec l&apos;Agent IA */}
+              Converation with AI Agent
             </h2>
             <p className="text-sm text-slate-500">
-              Assistant spécialisé en Supply Chain
+              {/* Assistant spécialisé en Supply Chain */}
+              Supply Chain Specialist Assistant
             </p>
           </div>
         </div>
@@ -83,11 +85,13 @@ export function MessageHistory() {
               </svg>
             </div>
             <p className="font-medium text-slate-500">
-              Démarrez une conversation
+              {/* Démarrez une conversation */}
+              Start a conversation
             </p>
             <p className="mt-1 text-sm text-slate-400">
-              Posez vos questions sur la gestion de votre chaîne
-              d&apos;approvisionnement
+              {/* Posez vos questions sur la gestion de votre chaîne */}
+              {/* d&apos;approvisionnement */}
+              Ask your questions about supply chain management
             </p>
           </div>
         ) : (
@@ -131,7 +135,8 @@ export function MessageHistory() {
                           </svg>
                         </div>
                         <span className="text-xs font-medium text-slate-500">
-                          Agent Supply Chain{" "}
+                          {/* Agent Supply Chain{" "} */}
+                          Supply Chain Agent{" "}
                           {message.response.model && (
                             <span className="text-slate-400">
                               ({message.response.model})

@@ -137,12 +137,18 @@ export default function CSVUploader({
           {/* Upload Text */}
           <div>
             <p className="text-lg font-semibold text-slate-700">
-              {isUploading
+              {/* {isUploading
                 ? "Traitement en cours..."
-                : "Importer un fichier CSV"}
+                : "Importer un fichier CSV"} */}
+                {
+                isUploading
+                  ? "Processing..."
+                  : "Upload a CSV file"
+                }
             </p>
             <p className="mt-2 text-sm text-slate-500">
-              Glissez-déposez votre fichier ici ou cliquez pour le sélectionner
+              {/* Glissez-déposez votre fichier ici ou cliquez pour le sélectionner */}
+              Drag and drop your file here or click to select
             </p>
           </div>
 
@@ -152,7 +158,8 @@ export default function CSVUploader({
               type="button"
               className="rounded-xl bg-blue-600 px-6 py-2 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-blue-700"
             >
-              Parcourir les fichiers
+              {/* Parcourir les fichiers */}
+              Browse Files
             </button>
           )}
 
@@ -160,7 +167,8 @@ export default function CSVUploader({
             <div className="flex items-center justify-center space-x-2">
               <div className="h-4 w-4 animate-spin rounded-full border-2 border-blue-600 border-t-transparent"></div>
               <span className="text-sm text-slate-600">
-                Lecture du fichier...
+                {/* Lecture du fichier... */}
+                Reading file...
               </span>
             </div>
           )}
@@ -169,11 +177,16 @@ export default function CSVUploader({
 
       {/* File Format Info */}
       <div className="rounded-lg bg-blue-50 p-4">
-        <h4 className="font-semibold text-blue-800">Format attendu :</h4>
+        <h4 className="font-semibold text-blue-800">Expected Format:</h4>
         <ul className="mt-2 space-y-1 text-sm text-blue-700">
-          <li>• Fichier au format CSV</li>
-          <li>• Première ligne contenant les en-têtes</li>
-          <li>• Encodage UTF-8 recommandé</li>
+          {/* <li>• Fichier au format CSV</li> */}
+          <li>• CSV file format</li>
+          {/* <li>• Première ligne contenant les en-têtes</li> */}
+          <li>• First line containing headers</li>
+          {/* <li>• Valeurs séparées par des virgules</li> */}
+          <li>• Values separated by commas</li>
+          {/* <li>• Encodage UTF-8 recommandé</li> */}
+          <li>• UTF-8 encoding recommended</li>
         </ul>
       </div>
     </div>

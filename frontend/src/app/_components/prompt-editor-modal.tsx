@@ -85,7 +85,7 @@ export function PromptEditorModal({ isOpen, onClose }: PromptEditorModalProps) {
       <div className="relative z-10 w-full max-w-4xl mx-4 bg-white rounded-2xl shadow-2xl max-h-[90vh] flex flex-col">
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-slate-200">
-          <h2 className="text-2xl font-bold text-slate-800">Éditeur de Prompt</h2>
+          <h2 className="text-2xl font-bold text-slate-800">Prompt Editor</h2>
           <button
             onClick={handleClose}
             className="p-2 text-slate-400 hover:text-slate-600 transition-colors"
@@ -101,18 +101,21 @@ export function PromptEditorModal({ isOpen, onClose }: PromptEditorModalProps) {
           {isLoading ? (
             <div className="flex items-center justify-center h-64">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-              <span className="ml-3 text-slate-600">Chargement du prompt...</span>
+              {/* <span className="ml-3 text-slate-600">Chargement du prompt...</span> */}
+              <span className="ml-3 text-slate-600">Loading Prompt...</span>
             </div>
           ) : (
             <div className="space-y-4">
               <label htmlFor="prompt-textarea" className="block text-sm font-medium text-slate-700">
-                Contenu du prompt
+                {/* Contenu du prompt */}
+                Prompt Content
               </label>
               <textarea
                 id="prompt-textarea"
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
-                placeholder="Entrez votre prompt ici..."
+                // placeholder="Entrez votre prompt ici..."
+                placeholder="Enter your prompt here..."
                 className="w-full h-96 resize-none rounded-xl border border-slate-300 p-4 text-slate-700 placeholder-slate-400 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
               />
             </div>
@@ -137,7 +140,8 @@ export function PromptEditorModal({ isOpen, onClose }: PromptEditorModalProps) {
                 <svg className="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20">
                   <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                 </svg>
-                <p className="ml-3 text-sm text-green-700">Prompt sauvegardé avec succès !</p>
+                {/* <p className="ml-3 text-sm text-green-700">Prompt sauvegardé avec succès !</p> */}
+                <p className="ml-3 text-sm text-green-700">Prompt saved!</p>
               </div>
             </div>
           )}
@@ -149,14 +153,14 @@ export function PromptEditorModal({ isOpen, onClose }: PromptEditorModalProps) {
             onClick={handleClose}
             className="px-6 py-2 text-slate-600 hover:text-slate-800 transition-colors"
           >
-            Annuler
+            Cancel
           </button>
           <button
             onClick={savePrompt}
             disabled={isSaving || isLoading}
             className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
           >
-            {isSaving ? "Sauvegarde..." : "Sauvegarder"}
+            {isSaving ? "Saving..." : "Save Prompt"}
           </button>
         </div>
       </div>

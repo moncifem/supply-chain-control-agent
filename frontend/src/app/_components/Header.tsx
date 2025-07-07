@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 
 export default function Header() {
   const pathname = usePathname();
 
   const navigation = [
     { name: "Prompt", href: "/", icon: "💬" },
-    { name: "Audio", href: "/audio", icon: "🎤" },
+    // { name: "Audio", href: "/audio", icon: "🎤" },
     { name: "Import CSV", href: "/OnBoarding", icon: "📊" },
   ];
 
@@ -19,15 +20,21 @@ export default function Header() {
           {/* Logo/Title */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 font-bold text-white">
-                S
+              <div className="flex h-16 w-16 items-center justify-center rounded-lg overflow-hidden">
+                <Image
+                  src="/logo.png"
+                  alt="SupplAIChain Logo"
+                  width={100}
+                  height={100}
+                  className="h-16 w-16 object-contain"
+                />
               </div>
-              <h1 className="text-xl font-bold text-slate-800">SupplAIChain</h1>
+              <h1 className="text-xl font-bold text-slate-800">SupplAI Chain Control Tower</h1>
             </Link>
           </div>
 
           {/* Navigation */}
-          <nav className="flex space-x-1">
+          <nav className="flex space-x-1 w-1/3">
             {navigation.map((item) => {
               const isActive = pathname === item.href;
               return (

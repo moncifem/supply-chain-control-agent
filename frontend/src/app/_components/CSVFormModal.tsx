@@ -161,10 +161,12 @@ export default function CSVFormModal({
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-slate-800">
-              Aucun fichier CSV chargé
+              {/* Aucun fichier CSV chargé */}
+              No CSV file loaded
             </h3>
             <p className="mt-2 text-slate-600">
-              Veuillez d&apos;abord importer un fichier CSV pour continuer.
+              {/* Veuillez d&apos;abord importer un fichier CSV pour continuer. */}
+              Please upload a CSV file first to continue.
             </p>
             <button
               onClick={onClose}
@@ -185,11 +187,13 @@ export default function CSVFormModal({
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h2 className="text-2xl font-bold text-slate-800">
-              Configuration des colonnes CSV
+              {/* Configuration des colonnes CSV */}
+              CSV Column Configuration
             </h2>
             <p className="text-slate-600">
-              {csvData.length} lignes • {includedCount}/{columns.length}{" "}
-              colonnes sélectionnées
+              {/* {csvData.length} lignes • {includedCount}/{columns.length}{" "} */}
+              {/* colonnes sélectionnées */}
+              {csvData.length} rows • {includedCount}/{columns.length}{" "}
             </p>
           </div>
           <button
@@ -215,13 +219,15 @@ export default function CSVFormModal({
         {/* Introduction */}
         <div className="mb-6 rounded-lg bg-blue-50 p-4">
           <h3 className="font-semibold text-blue-800">
-            Pourquoi cette étape ?
+            {/* Pourquoi cette étape ? */}
+            Why this step?
           </h3>
           <p className="mt-2 text-sm text-blue-700">
-            Avant d&apos;importer vos données, nous devons comprendre la
-            structure de votre fichier CSV. Configurez chaque colonne en
-            précisant son type de données et en ajoutant une description. Vous
-            pouvez également exclure les colonnes qui ne vous intéressent pas.
+            {/* Avant d&apos;importer vos données, nous devons comprendre la */}
+            {/* structure de votre fichier CSV. Configurez chaque colonne en */}
+            {/* précisant son type de données et en ajoutant une description. Vous */}
+            {/* pouvez également exclure les colonnes qui ne vous intéressent pas. */}
+            Before importing your data, we need to understand the structure of your CSV file. Configure each column by specifying its data type and adding a description. You can also exclude columns that are not relevant to you.
           </p>
         </div>
 
@@ -229,7 +235,8 @@ export default function CSVFormModal({
           {/* Table Name */}
           <div>
             <label className="block text-sm font-semibold text-slate-700">
-              Nom de la table
+              {/* Nom de la table */}
+              Table Name
             </label>
             <input
               type="text"
@@ -240,15 +247,17 @@ export default function CSVFormModal({
               required
             />
             <p className="mt-1 text-xs text-slate-500">
-              Choisissez un nom descriptif pour identifier facilement vos
-              données
+              {/* Choisissez un nom descriptif pour identifier facilement vos */}
+              {/* données */}
+              Choose a descriptive name to easily identify your data
             </p>
           </div>
 
           {/* Column Configuration */}
           <div>
             <h3 className="mb-4 text-lg font-semibold text-slate-800">
-              Configuration des colonnes
+              {/* Configuration des colonnes */}
+              Column Configuration
             </h3>
 
             {/* Table Header */}
@@ -275,20 +284,24 @@ export default function CSVFormModal({
                             />
                           </svg>
                           <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded-lg bg-slate-800 px-3 py-2 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100">
-                            Décochez pour exclure la colonne de l&apos;import
+                            {/* Décochez pour exclure la colonne de l&apos;import */}
+                            Uncheck to exclude the column from import
                           </div>
                         </div>
                       </div>
                     </th>
                     <th className="border-b border-slate-200 p-4 text-left font-semibold text-slate-700">
-                      Nom de la colonne
+                      {/* Nom de la colonne */}
+                      Column Name
                     </th>
                     <th className="border-b border-slate-200 p-4 text-left font-semibold text-slate-700">
+                      {/* Description */}
                       Description
                     </th>
                     <th className="border-b border-slate-200 p-4 text-left font-semibold text-slate-700">
                       <div className="flex items-center space-x-2">
-                        <span>Type de données</span>
+                        {/* <span>Type de données</span> */}
+                        <span>Data Type</span>
                         <div className="group relative">
                           <button
                             type="button"
@@ -311,7 +324,8 @@ export default function CSVFormModal({
                           {showTypeTooltip && (
                             <div className="absolute top-full left-1/2 z-50 mt-2 w-80 -translate-x-1/2 transform rounded-lg bg-slate-800 p-4 text-xs text-white opacity-100 shadow-2xl transition-opacity">
                               <h4 className="mb-2 font-semibold text-white">
-                                Types de données disponibles :
+                                {/* Types de données disponibles : */}
+                                Available Data Types:
                               </h4>
                               <div className="space-y-2">
                                 {DATA_TYPES.map((type) => (
@@ -334,7 +348,8 @@ export default function CSVFormModal({
                       </div>
                     </th>
                     <th className="border-b border-slate-200 p-4 text-left font-semibold text-slate-700">
-                      Aperçu
+                      {/* Aperçu */}
+                      Preview
                     </th>
                   </tr>
                 </thead>
@@ -357,11 +372,13 @@ export default function CSVFormModal({
                           />
                           {config.included ? (
                             <span className="text-xs font-medium text-green-600">
-                              ✓ Oui
+                              {/* ✓ Oui */}
+                              ✓ Yes
                             </span>
                           ) : (
                             <span className="text-xs font-medium text-red-600">
-                              ✗ Non
+                              {/* ✗ Non */}
+                              ✗ No
                             </span>
                           )}
                         </div>
@@ -384,10 +401,15 @@ export default function CSVFormModal({
                           onChange={(e) =>
                             updateColumn(index, "description", e.target.value)
                           }
+                          // placeholder={
+                          //   config.included
+                          //     ? "Ex: Identifiant produit, quantité en stock..."
+                          //     : "Colonne exclue"
+                          // }
                           placeholder={
                             config.included
-                              ? "Ex: Identifiant produit, quantité en stock..."
-                              : "Colonne exclue"
+                              ? "Ex: Product ID, stock quantity..."
+                              : "Column excluded"
                           }
                           className={`w-full rounded-lg border p-2 text-sm focus:outline-none ${
                             config.included
@@ -442,22 +464,27 @@ export default function CSVFormModal({
           {/* Summary */}
           <div className="rounded-lg bg-green-50 p-4">
             <h4 className="font-semibold text-green-800">
-              Résumé de l&apos;import :
+              {/* Résumé de l&apos;import : */}
+              Import Summary:
             </h4>
             <ul className="mt-2 space-y-1 text-sm text-green-700">
               <li>
-                • <strong>{includedCount}</strong> colonne(s) sera/seront importées
+                {/* • <strong>{includedCount}</strong> colonne(s) sera/seront importées */}
+                • <strong>{includedCount}</strong> column(s) will be imported
               </li>
               <li>
-                • <strong>{csvData.length}</strong> lignes de données
+                {/* • <strong>{csvData.length}</strong> lignes de données */}
+                • <strong>{csvData.length}</strong> rows of data
               </li>
               <li>
-                • Table : <strong>{tableName || "Non défini"}</strong>
+                {/* • Table : <strong>{tableName || "Non défini"}</strong> */}
+                Table: <strong>{tableName || "Not defined"}</strong>
               </li>
               {columns.length - includedCount > 0 && (
                 <li className="text-red-600">
-                  • <strong>{columns.length - includedCount}</strong> colonnes
-                  seront ignorées
+                  {/* • <strong>{columns.length - includedCount}</strong> colonnes
+                  seront ignorées */}
+                  • <strong>{columns.length - includedCount}</strong> columns will be ignored
                 </li>
               )}
             </ul>
@@ -477,7 +504,8 @@ export default function CSVFormModal({
               disabled={includedCount === 0 || !tableName}
               className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-blue-300"
             >
-              Importer {includedCount} colonnes
+              {/* Importer {includedCount} colonnes */}
+              Upload {includedCount} column(s)
             </button>
           </div>
         </form>

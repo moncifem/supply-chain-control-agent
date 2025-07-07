@@ -59,13 +59,13 @@ export default function Home() {
               Dashboard Hackathon
             </h1>
             <p className="text-lg text-slate-600">
-              Entrez votre prompt pour commencer
+              Enter your prompt to get started
             </p>
             <button
               onClick={() => setIsPromptEditorOpen(true)}
               className="mt-4 rounded-lg bg-blue-600 px-6 py-2 text-white shadow-md transition-colors hover:bg-blue-700"
             >
-              Éditer le prompt système
+              Edit system prompt
             </button>
           </div>
 
@@ -77,7 +77,7 @@ export default function Home() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Tapez votre prompt ici..."
+                  placeholder="Type your prompt here..."
                   className="h-32 w-full resize-none rounded-xl border border-slate-300 p-4 text-slate-700 placeholder-slate-400 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   autoFocus
                 />
@@ -89,13 +89,13 @@ export default function Home() {
                   disabled={!prompt.trim() || sending}
                   className="rounded-xl bg-slate-800 px-8 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
                 >
-                  {sending ? "Envoi..." : "Valider"}
+                  {sending ? "Sending..." : "Submit"}
                 </button>
                 <AudioRecorder
                   onSuccess={(data) =>
                     void utils.gemini.getMessages.invalidate()
                   }
-                  onError={(error) => console.error("Erreur :", error)}
+                  onError={(error) => console.error("Error :", error)}
                 />
               </div>
             </form>
@@ -104,11 +104,11 @@ export default function Home() {
           {/* Instruction */}
           <div className="mt-8 text-center">
             <p className="text-sm text-slate-500">
-              Appuyez sur{" "}
+              Press{" "}
               <kbd className="rounded bg-slate-200 px-2 py-1 text-xs">
-                Entrée
+                Enter
               </kbd>{" "}
-              ou cliquez sur le bouton pour valider
+              or click the button to submit
             </p>
           </div>
 

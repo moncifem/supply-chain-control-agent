@@ -48,7 +48,7 @@ export async function callSquadAgent(prompt: string, reqNumber: string) {
 
 	try {
 		const response = await fetch(
-      "http://localhost:8088/agent/generate-prompt",
+      "https://raise.logi-green.com/agent/generate-prompt",
       {
         method: "POST",
         headers: {

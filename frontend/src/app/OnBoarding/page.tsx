@@ -26,10 +26,12 @@ export default function OnBoarding() {
           {/* Header */}
           <div className="mb-12 text-center">
             <h1 className="mb-4 text-4xl font-bold text-slate-800">
-              Configuration des Données
+              {/* Configuration des Données */}
+              Data Configuration
             </h1>
             <p className="text-lg text-slate-600">
-              Importez votre fichier CSV pour commencer
+              {/* Importez votre fichier CSV pour commencer */}
+              Import your CSV file to get started
             </p>
           </div>
 
@@ -48,7 +50,8 @@ export default function OnBoarding() {
           {/* Instructions */}
           <div className="mt-8 text-center">
             <p className="text-sm text-slate-500">
-              Glissez-déposez votre fichier CSV ou cliquez pour le sélectionner
+              {/* Glissez-déposez votre fichier CSV ou cliquez pour le sélectionner */}
+              Drag and drop your CSV file or click to select it
             </p>
           </div>
         </div>
