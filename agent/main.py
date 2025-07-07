@@ -12,7 +12,7 @@ app = FastAPI(title="Supply Chain Control Agent API")
 def fetch_system_prompt():
     """Fetch the system prompt from the external API"""
     try:
-        response = requests.get("https://thesquad.fr/api/prompt")
+        response = requests.get("http://localhost:3449/api/prompt")
         response.raise_for_status()
         data = response.json()
         return data.get("prompt", "")
@@ -49,7 +49,7 @@ async def query_shipments(request: QueryRequest):
     
     Parameters:
     - query: The natural language query to execute
-    - prompt: Optional custom prompt. If not provided, fetches from https://thesquad.fr/api/prompt
+    - prompt: Optional custom prompt. If not provided, fetches from http://localhost:3449/api/prompt
     
     Examples:
     - {"query": "give me the top 10 shipments that were late"}

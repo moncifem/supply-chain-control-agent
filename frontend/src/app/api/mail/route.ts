@@ -23,13 +23,13 @@ export async function callSquadAgent(query: string, reqNumber: string) {
 	}, 5000);
 
 	try {
-		const response = await fetch("https://thesquad.fr/agent/query", {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({ query, prompt: promptMail } as QueryRequest),
-		});
+		const response = await fetch("http://localhost:8088/agent/query", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, prompt: promptMail } as QueryRequest),
+    });
 
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);

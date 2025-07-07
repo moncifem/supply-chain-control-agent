@@ -25,7 +25,7 @@ export function PromptEditorModal({ isOpen, onClose }: PromptEditorModalProps) {
     setIsLoading(true);
     setError(null);
     try {
-      const response = await fetch("https://thesquad.fr/api/prompt");
+      const response = await fetch("https://raise.logi-green.com/api/prompt");
       if (!response.ok) {
         throw new Error(`Erreur ${response.status}: ${response.statusText}`);
       }
@@ -44,7 +44,7 @@ export function PromptEditorModal({ isOpen, onClose }: PromptEditorModalProps) {
     setError(null);
     setSuccess(false);
     try {
-      const response = await fetch("https://thesquad.fr/api/prompt", {
+      const response = await fetch("https://raise.logi-green.com/api/prompt", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

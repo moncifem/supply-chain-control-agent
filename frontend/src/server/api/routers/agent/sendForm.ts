@@ -47,13 +47,16 @@ export async function callSquadAgent(prompt: string, reqNumber: string) {
 	}, 5000);
 
 	try {
-		const response = await fetch("https://thesquad.fr/agent/generate-prompt", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
+		const response = await fetch(
+      "http://localhost:8088/agent/generate-prompt",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ prompt } as QueryRequest),
       },
-      body: JSON.stringify({ prompt } as QueryRequest),
-    });
+    );
 
 		if (!response.ok) {
 			throw new Error(`HTTP error! status: ${response.status}`);
