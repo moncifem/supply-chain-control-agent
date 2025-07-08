@@ -10,7 +10,7 @@ export default function Header() {
   const navigation = [
     { name: "Prompt", href: "/", icon: "💬" },
     // { name: "Audio", href: "/audio", icon: "🎤" },
-    { name: "Import CSV", href: "/OnBoarding", icon: "📊" },
+    { name: "Import Schema", href: "/OnBoarding", icon: "📊" },
   ];
 
   return (
@@ -60,7 +60,7 @@ export default function Header() {
               RAISE Hackathon 2025
             </div>
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-100">
-              <span className="text-xs font-semibold text-slate-600">V</span>
+              <span className="text-xs font-semibold text-slate-600">AI</span>
             </div>
           </div>
         </div>

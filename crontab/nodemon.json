@@ -1,0 +1,9 @@
+{
+  "watch": ["."],
+  "ext": "ts,js,json",
+  "ignore": ["node_modules", "dist"],
+  "exec": "npx esrun start.ts",
+  "env": {
+    "NODE_ENV": "development"
+  }
+}

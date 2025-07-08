@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
 
     console.log("Mail object created:", mailObject);
     const response = await callSquadAgent(
-      `Réponds à cet email de ${mailObject.fromName} (${mailObject.fromAddress}) : ${mailObject.body}`,
+      `Réponds à cet email sous format html de ${mailObject.fromName} (${mailObject.fromAddress}) : ${mailObject.body}`,
       "mail-processing",
     );
     //  verifie que tout  est defini
@@ -78,7 +78,8 @@ export async function POST(request: NextRequest) {
     // Envoyer vers le webhook n8n
     try {
       const webhookResponse = await fetch(
-        "https://n8n.srv753028.hstgr.cloud/webhook-test/0912f56b-4eaf-4ad4-a759-957082ee64bb",
+        // "https://n8n.srv753028.hstgr.cloud/webhook-test/0912f56b-4eaf-4ad4-a759-957082ee64bb",
+        "https://n8n.srv753028.hstgr.cloud/webhook/0912f56b-4eaf-4ad4-a759-957082ee64bb",
         {
           method: "POST",
           headers: {

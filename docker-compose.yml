@@ -52,6 +52,20 @@ services:
       - radioMysql
     networks:
       - AppNetwork
+  Cron:
+    image: node:20.15.1
+    container_name: cronCT
+    working_dir: /crontab
+    volumes:
+      - ./crontab:/crontab
+    env_file:
+      - .env
+    command: sh -c "npm install && npm run dev"
+    restart: unless-stopped
+    depends_on:
+      - App
+    networks:
+      - AppNetwork
 
 volumes:
   supply_chain_mysql_data:

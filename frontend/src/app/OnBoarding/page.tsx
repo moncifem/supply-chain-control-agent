@@ -27,11 +27,11 @@ export default function OnBoarding() {
           <div className="mb-12 text-center">
             <h1 className="mb-4 text-4xl font-bold text-slate-800">
               {/* Configuration des Données */}
-              Data Configuration
+              Data Schema Configuration
             </h1>
             <p className="text-lg text-slate-600">
               {/* Importez votre fichier CSV pour commencer */}
-              Import your CSV file to get started
+              Import a sample CSV file from your database for the data schema setting.
             </p>
           </div>
 
