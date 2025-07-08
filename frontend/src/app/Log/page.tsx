@@ -21,8 +21,8 @@ export default function LogPage() {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const data: LogEntry = await response.json();
-      setLogs(data);
+      const data: LogEntry[] = await response.json();
+      setLogs(data[0] ?? { name: "Agent Logs", logs: "No logs available" });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error occurred");
     } finally {
