@@ -15,7 +15,7 @@ app = FastAPI(title="Supply Chain Control Agent API")
 def fetch_system_prompt():
     """Fetch the system prompt from the external API"""
     try:
-        response = requests.get("http://localhost:3449/api/prompt")
+        response = requests.get("http://appCT:3000/api/prompt")
         response.raise_for_status()
         data = response.json()
         return data.get("prompt", "")
@@ -79,10 +79,10 @@ async def query_shipments(request: QueryRequest):
         else:
             print("No external prompt available, using default")
         
-        schema_prompt = load_schema_prompt()
-        if schema_prompt:
-            current_agent.prompt_templates["system_prompt"] = current_agent.prompt_templates["system_prompt"] + "\n\n" + schema_prompt
-            print("Added schema prompt to system prompt")
+        # schema_prompt = load_schema_prompt()
+        # if schema_prompt:
+        #     current_agent.prompt_templates["system_prompt"] = current_agent.prompt_templates["system_prompt"] + "\n\n" + schema_prompt
+        #     print("Added schema prompt to system prompt")
         
         result = current_agent.run(request.query)
         return QueryResponse(result=str(result))
