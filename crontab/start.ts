@@ -1,25 +1,22 @@
 import { generateChart } from "./generateChart";
+import { getLogs } from "./log";
 
 const cron = require('node-cron');
 const http = require('http');
 const url = require('url');
 
-console.log('Starting cron job2 ...');
+console.log('Starting cron job ...');
 
 // Toutes les 7 jours (chaque dimanche à minuit)
 cron.schedule('0 0 * * 0', generateChart);
 
 
 // Serveur HTTP simple
-const server = http.createServer((req, res) => {
+const server = http.createServer(async (req, res) => {
   const parsedUrl = url.parse(req.url, true);
   
   if (parsedUrl.pathname === '/getlogs' && req.method === 'GET') {
-    const logs = {
-        appCT: [],
-        agentCT: [],
-        appMysql: []
-    }
+    const logs = await getLogs();
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify(logs));
   } else {
