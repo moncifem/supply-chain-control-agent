@@ -1,0 +1,19 @@
+{
+  "name": "supply-chain-cron",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon --exec 'npx esrun start.ts' --watch . --ext ts,js,json",
+    "start": "npx esrun start.ts"
+  },
+  "dependencies": {
+    "node-cron": "^3.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/node-cron": "^3.0.11",
+    "esrun": "^3.2.26",
+    "typescript": "^5.0.0",
+    "nodemon": "^3.0.0"
+  }
+}

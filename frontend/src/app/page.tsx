@@ -56,10 +56,10 @@ export default function Home() {
           {/* Header */}
           <div className="mb-12 text-center">
             <h1 className="mb-4 text-4xl font-bold text-slate-800">
-              Dashboard Hackathon
+              Smart Control Tower Agent
             </h1>
             <p className="text-lg text-slate-600">
-              Enter your prompt to get started
+              Ask something to the agent to get started
             </p>
             <button
               onClick={() => setIsPromptEditorOpen(true)}
@@ -77,7 +77,7 @@ export default function Home() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   onKeyPress={handleKeyPress}
-                  placeholder="Type your prompt here..."
+                  placeholder="Ask the agent about..."
                   className="h-32 w-full resize-none rounded-xl border border-slate-300 p-4 text-slate-700 placeholder-slate-400 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
                   autoFocus
                 />

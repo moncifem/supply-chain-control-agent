@@ -86,13 +86,13 @@ export default function CSVFormModal({
         }
       }
     });
-  }, [columnConfigs]);
-  
+  }, []);
+
   if (!isOpen) return null;
-  
+
   const generateFormData = () => {
     const result: Record<string, { description: string; type: string }> = {};
-    
+
     columnConfigs
       .filter((col) => col.included)
       .forEach((col) => {
@@ -137,7 +137,7 @@ export default function CSVFormModal({
   };
 
   const includedCount = columnConfigs.filter((col) => col.included).length;
-  
+
   // Placeholder quand aucun CSV n'est chargé
   if (!csvData || csvData.length === 0) {
     return (
@@ -188,7 +188,7 @@ export default function CSVFormModal({
           <div>
             <h2 className="text-2xl font-bold text-slate-800">
               {/* Configuration des colonnes CSV */}
-              CSV Column Configuration
+              Database Schema Configuration
             </h2>
             <p className="text-slate-600">
               {/* {csvData.length} lignes • {includedCount}/{columns.length}{" "} */}
@@ -227,7 +227,7 @@ export default function CSVFormModal({
             {/* structure de votre fichier CSV. Configurez chaque colonne en */}
             {/* précisant son type de données et en ajoutant une description. Vous */}
             {/* pouvez également exclure les colonnes qui ne vous intéressent pas. */}
-            Before importing your data, we need to understand the structure of your CSV file. Configure each column by specifying its data type and adding a description. You can also exclude columns that are not relevant to you.
+            The agent needs to understand the structure of your database to answer your questions. Configure each column by specifying its data type and adding a description. You can also exclude columns that are not relevant to you. The results will be used to generate the system prompt.
           </p>
         </div>
 
@@ -268,7 +268,7 @@ export default function CSVFormModal({
                   <tr>
                     <th className="border-b border-slate-200 p-4 text-left font-semibold text-slate-700">
                       <div className="flex items-center space-x-2">
-                        <span>Conserver</span>
+                        <span>Keep</span>
                         <div className="group relative">
                           <svg
                             className="h-4 w-4 cursor-help text-slate-400"
@@ -283,7 +283,7 @@ export default function CSVFormModal({
                               d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                             />
                           </svg>
-                          <div className="absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded-lg bg-slate-800 px-3 py-2 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100">
+                          <div className="z-100 absolute bottom-full left-1/2 mb-2 -translate-x-1/2 transform rounded-lg bg-slate-800 px-3 py-2 text-xs whitespace-nowrap text-white opacity-0 transition-opacity group-hover:opacity-100">
                             {/* Décochez pour exclure la colonne de l&apos;import */}
                             Uncheck to exclude the column from import
                           </div>
@@ -411,11 +411,10 @@ export default function CSVFormModal({
                               ? "Ex: Product ID, stock quantity..."
                               : "Column excluded"
                           }
-                          className={`w-full rounded-lg border p-2 text-sm focus:outline-none ${
-                            config.included
-                              ? "border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                              : "border-slate-200 bg-slate-100 text-slate-400"
-                          }`}
+                          className={`w-full rounded-lg border p-2 text-sm focus:outline-none ${config.included
+                            ? "border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                            : "border-slate-200 bg-slate-100 text-slate-400"
+                            }`}
                           disabled={!config.included}
                         />
                       </td>
@@ -427,11 +426,10 @@ export default function CSVFormModal({
                           onChange={(e) =>
                             updateColumn(index, "type", e.target.value)
                           }
-                          className={`w-full rounded-lg border p-2 text-sm focus:outline-none ${
-                            config.included
-                              ? "border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
-                              : "border-slate-200 bg-slate-100 text-slate-400"
-                          }`}
+                          className={`w-full rounded-lg border p-2 text-sm focus:outline-none ${config.included
+                            ? "border-slate-300 focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+                            : "border-slate-200 bg-slate-100 text-slate-400"
+                            }`}
                           disabled={!config.included}
                         >
                           {DATA_TYPES.map((type) => (
