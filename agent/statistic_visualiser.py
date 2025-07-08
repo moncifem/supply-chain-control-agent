@@ -2,6 +2,7 @@ from smolagents import CodeAgent
 from model import model
 from sql_agent import sql_engine
 import os
+import base64
 VISUAL_SYSTEM_PROMPT_PATH = os.path.join(
     os.path.dirname(__file__), "visual_prompt.txt"
 )
