@@ -11,7 +11,7 @@ interface QueryRequest {
   prompt: string;
 }
 
-const promptMail = "Your output should be an HTML-formatted email response that answers the question.Only output the HTML body of the email, nothing else."
+const promptMail = "Your output should be an HTML-formatted email response that answers the question.Only output the HTML body of the email, nothing else. Today is July 8th, 2025, use this information to do comparisons on the database."
 
 // Déplacer la fonction AVANT les exports et enlever 'export'
 async function callSquadAgent(query: string, reqNumber: string) {
