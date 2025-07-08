@@ -12,12 +12,16 @@ export async function getLogs() {
     const container = 'agentCT';
     
     try {
+      // Récupérer les logs et les inverser pour avoir le plus récent en premier
       const { stdout } = await execAsync(`docker logs --tail=1000 ${container}`);
-      console.log(`=== Logs from ${container} ===`);
-      console.log(stdout);
-      console.log(`=== End logs from ${container} ===\n`);
       
-      return [{ name: container, logs: stdout }];
+      // Inverser l'ordre des lignes pour avoir le plus récent en premier
+      const reversedLogs = stdout
+        .split('\n')
+        .reverse()
+        .join('\n');
+      
+      return [{ name: container, logs: reversedLogs }];
     } catch (error) {
       console.error(`Error getting logs from ${container}:`, error.message);
       return [{ name: container, logs: `Error: ${error.message}` }];

@@ -11,6 +11,8 @@ export default function Header() {
     { name: "Prompt", href: "/", icon: "💬" },
     // { name: "Audio", href: "/audio", icon: "🎤" },
     { name: "Import Schema", href: "/OnBoarding", icon: "📊" },
+    {name: "Logs", href: "/Log", icon: "📜" },
+
   ];
 
   return (

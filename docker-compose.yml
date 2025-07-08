@@ -25,9 +25,9 @@ services:
       - 3449:3000
     env_file:
       - .env
-    command: sh -c "npm i && npx prisma migrate dev && npx prisma db pull && npx next dev"
+    # command: sh -c "npm i && npx prisma migrate dev && npx prisma db pull && npx next dev"
     # Mode PROD
-    # command: sh -c "npm i && npx prisma migrate deploy && npx prisma generate && npm run build && npm run start"
+    command: sh -c "npm i && npx prisma migrate deploy && npx prisma generate && npm run build && npm run start"
     restart: unless-stopped
     depends_on:
       - radioMysql

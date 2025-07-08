@@ -1,11 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { FormatLogs } from "../_components/FormatLogs";
 
 interface LogEntry {
   name: string;
   logs: string;
 }
+
+
+
 
 export default function LogPage() {
   const [logs, setLogs] = useState<LogEntry>({ name: "", logs: "" });
@@ -90,9 +94,9 @@ export default function LogPage() {
                   </h3>
                 </div>
                 <div className="p-6">
-                  <pre className="max-h-96 overflow-x-auto overflow-y-auto rounded-lg bg-slate-50 p-4 text-sm whitespace-pre-wrap text-slate-700">
-                    {logs.logs || "No logs available"}
-                  </pre>
+                  <div className="max-h-96 overflow-y-auto rounded-lg bg-slate-50 p-4 text-sm">
+                    {FormatLogs(logs.logs)}
+                  </div>
                 </div>
               </div>
             )}

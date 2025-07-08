@@ -48,7 +48,32 @@ export async function generateChart() {
             // Sauvegarder l'image
             fs.writeFileSync(filepath, Buffer.from(buffer));
             console.log(`Chart saved to: ${filepath}`);
-
+            const imageUrl = `https://raise.logi-green.com/log/image/${filename}`;
+            const urlN8N = "https://n8n.srv753028.hstgr.cloud/webhook/0912f56b-4eaf-4ad4-a759-957082ee64bb";
+            const htmlContent = `<img src="${imageUrl}" alt="Generated Chart" style="max-width: 100%; height: auto;">`;
+            console.log('Sending webhook to n8n with image URL:', imageUrl);
+            console.log('Webhook URL:', urlN8N);
+            const bodyContent = {
+                        response: htmlContent,
+                    };
+            console.log('Body content:', bodyContent);
+            const webhookResponse = await fetch(
+                urlN8N,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(bodyContent),
+                },
+            );
+            if (!webhookResponse.ok) {
+                throw new Error(`Webhook error! status: ${webhookResponse.status}`);
+            }
+            console.log('Webhook sent successfully to n8n');
+            console.log('Webhook response status:', webhookResponse.status);
+            console.log('Webhook response headers:', Object.fromEntries(webhookResponse.headers));
+            console.log('Webhook response body:', await webhookResponse.text());
         } else if (contentType && contentType.includes('application/json')) {
             // C'est du JSON (probablement une erreur)
             const data = await response.json();
