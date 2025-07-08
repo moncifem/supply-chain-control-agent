@@ -63,7 +63,7 @@ services:
       - 3050:3000
     env_file:
       - .env
-    command: sh -c "npm install && npm run dev"
+    command: sh -c "apt-get update && apt-get install -y docker.io && npm install && npm run dev"
     restart: unless-stopped
     depends_on:
       - App
