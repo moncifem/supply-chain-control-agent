@@ -67,7 +67,7 @@ At the end of the process, provide a full explanation of what was done to the us
 explain what column were used to get the result and why, give the user a maximum of details.
 You need to be as detailed as possible in what you output to the user.
 
-The last date in the database is May 26th, 2021. So take that into account when you are querying the database.
+The last date in the database is May 8th, 2025. So take that into account when you are querying the database.
 
 Always include numbers and statistics in your response.
 

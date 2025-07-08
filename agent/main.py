@@ -1,11 +1,14 @@
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import Optional
 import requests
+import os
 from smolagents import CodeAgent
 from sql_agent import sql_engine, custom_instructions
 from model import model
 from prompting import get_prompt
+from statistic_visualiser import visual_agent
 
 app = FastAPI(title="Supply Chain Control Agent API")
 
@@ -103,6 +106,20 @@ async def generate_prompt(request: ChatRequest):
         return ChatResponse(response=response)
     except Exception as e:
         return ChatResponse(response=f"Error: {str(e)}")
+
+@app.post("/chart")
+async def get_chart():
+    """Get deliveries by day chart"""
+    try:
+        filename = visual_agent.run("Please create a bar visualisation of the number of deliveries by day. Avoid select * from an entire table to avoid rate limite on LLM tokens. Return only the the file name of the visualisation and NOTHING ELSE.")
+        filename = filename.strip()
+        
+        if os.path.exists(filename):
+            return FileResponse(filename, media_type="image/png", filename=filename)
+        else:
+            return {"error": f"File not found: {filename}"}
+    except Exception as e:
+        return {"error": str(e)}
 
 @app.get("/")
 async def root():

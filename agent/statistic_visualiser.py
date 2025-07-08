@@ -30,5 +30,5 @@ visual_agent = CodeAgent(
     description="Creates beautiful, professional visualizations and saves them locally. Always uses proper code format and saves files correctly.",
 )
 if __name__ == "__main__":
-    result = visual_agent.run("Create some visualizations about statistics of the shipments table.")
+    result = visual_agent.run("Please create a bar visualisation of the number of deliveries by day. Avoid select * from an entire table to avoid rate limite on LLM tokens. Return only the the file name of the visualisation and NOTHING ELSE.")
     print(result)
