@@ -58,12 +58,16 @@ services:
     working_dir: /crontab
     volumes:
       - ./crontab:/crontab
+      - /var/run/docker.sock:/var/run/docker.sock  # Accès au socket Docker
+    ports:
+      - 3050:3000
     env_file:
       - .env
     command: sh -c "npm install && npm run dev"
     restart: unless-stopped
     depends_on:
       - App
+      - Agent
     networks:
       - AppNetwork
 
