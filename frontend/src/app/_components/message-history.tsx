@@ -7,7 +7,7 @@ export function MessageHistory() {
     data: messages,
     isLoading,
     error,
-  } = api.gemini.getMessages.useQuery();
+  } = api.message.getMessages.useQuery();
 
   if (isLoading) {
     return (

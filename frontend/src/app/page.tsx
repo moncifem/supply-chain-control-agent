@@ -21,7 +21,7 @@ export default function Home() {
       console.log("Message sent successfully:", data);
       setPrompt(""); // Clear the prompt after sending
       // Invalider la query pour forcer le rechargement
-      void utils.gemini.getMessages.invalidate();
+      void utils.message.getMessages.invalidate();
     },
     onError: (error) => {
       console.error("Error sending message:", error);
@@ -93,7 +93,7 @@ export default function Home() {
                 </button>
                 <AudioRecorder
                   onSuccess={(data) =>
-                    void utils.gemini.getMessages.invalidate()
+                    void utils.message.getMessages.invalidate()
                   }
                   onError={(error) => console.error("Error :", error)}
                 />

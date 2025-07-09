@@ -1,5 +1,5 @@
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
-import { geminiRouter } from "./routers/geminit";
+import { messageRouter } from "./routers/message";
 import { agentRouter } from "./routers/agent";
 import { groqRouter } from "./routers/groq";
 
@@ -9,7 +9,7 @@ import { groqRouter } from "./routers/groq";
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  gemini: geminiRouter,
+  message: messageRouter,
   agent: agentRouter,
   groq: groqRouter
 });
